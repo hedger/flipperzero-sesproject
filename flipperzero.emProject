@@ -1,6 +1,5 @@
 <!DOCTYPE CrossStudio_Project_File>
 <solution Name="Flipper" target="8" version="2">
-  <import file_name="./customized.emProject" />
   <configuration
     Name="Debug"
     _gcc_debugging_level="Level 3"
