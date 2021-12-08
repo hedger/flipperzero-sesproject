@@ -6,7 +6,7 @@ import os
 def exec_git(args):
   cmd = ['git']
   cmd.extend(args.split(' '))
-  return subprocess.check_output(cmd, stderr=subprocess.STDOUT).strip().decode()
+  return subprocess.check_output(cmd, cwd="..", stderr=subprocess.STDOUT).strip().decode()
 
 commit = exec_git('rev-parse --short HEAD') or 'unknown'
 

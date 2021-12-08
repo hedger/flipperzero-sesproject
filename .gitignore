@@ -1,5 +1,4 @@
 *.emSession
 version.inc
-out
-Output
-tmp
+bootloader/
+firmware/
