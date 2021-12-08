@@ -1,14 +1,14 @@
 <!DOCTYPE CrossStudio_Project_File>
 <solution Name="Flipper" target="8" version="2">
   <configuration
-    Name="Debug"
+    Name="Flags: Debug"
     _gcc_debugging_level="Level 3"
     c_preprocessor_definitions="FURI_DEBUG;NDEBUG;"
     gcc_cl_optimization_level="Debug"
     gcc_optimization_level="None"
     hidden="Yes" />
   <configuration
-    Name="Release"
+    Name="Flags: Release"
     c_preprocessor_definitions="NDEBUG"
     gcc_cl_optimization_level="Size"
     gcc_debugging_level="None"
@@ -34,8 +34,7 @@
     c_preprocessor_definitions="FLASHMGR_MOCK"
     hidden="Yes" />
   <configuration
-    Name="Dbg: JLINK"
-    debug_target_connection="J-Link"
+    Name="Debugger: JLINK"
     debug_leave_target_running="Yes"
     debug_memory_upload_page_size="4096"
     debug_restrict_memory_access="No"
@@ -43,10 +42,10 @@
     debug_target_connection="GDB Server"
     debug_terminal_log_file="debugger.log"
     debug_threads_max="32"
-    speed="0"
-    hidden="Yes" />
+    hidden="Yes"
+    speed="0" />
   <configuration
-    Name="Dbg: OpenOCD over ST-LINK"
+    Name="Debugger: OpenOCD over ST-LINK"
     _gdb_server_reset_command="reset halt"
     debug_enable_RTT="No"
     debug_initial_breakpoint_set_option="Only With No Breakpoints Set"
@@ -69,9 +68,9 @@
     gdb_server_reset_command=""
     gdb_server_type="OpenOCD"
     gdb_server_write_timeout="20"
+    hidden="Yes"
     speed="0"
-    target_loader_erase_all="No"
-    hidden="Yes" />
+    target_loader_erase_all="No" />
   <configuration
     Name="Common"
     THREAD_SCRIPT="FreeRTOS CM4"
@@ -99,6 +98,7 @@
     armgnu_cl_fpu="fpv4-sp-d16"
     asm_additional_options="-x assembler-with-cpp"
     build_intermediate_directory="tmp/$(Configuration)/o/$(ProjectName)"
+    build_output_directory="$(Configuration)"
     build_output_file_name="$(OutDir)/flipper-z-$(FlipperHwRev)-$(ProjectName)-local$(EXE)"
     build_remove_unused_symbols="Yes"
     c_additional_options="-mthumb;-fdata-sections;-ffunction-sections;-fno-math-errno;-fstack-usage;"
@@ -137,11 +137,11 @@
     pre_build_command_wd="$(SolutionDir)"
     property_groups_file_path="$(SolutionDir)/xtras/flipper.property-groups.xml" />
   <configuration
-    Name="dbg"
-    inherited_configurations="Internal;Debug;FlipperF7;Dbg: OpenOCD over ST-LINK" />
+    Name="Debug"
+    inherited_configurations="Internal;Flags: Debug;FlipperF7;Debugger: OpenOCD over ST-LINK" />
   <configuration
-    Name="rel"
-    inherited_configurations="Internal;Release;FlipperF7;Dbg: OpenOCD over ST-LINK" />
+    Name="Release"
+    inherited_configurations="Internal;Flags: Release;FlipperF7;Debugger: OpenOCD over ST-LINK" />
   <project Name="firmware">
     <configuration
       BUILD_OPTIONS="ARM GNU"
