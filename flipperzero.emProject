@@ -111,7 +111,7 @@
     external_cpp_compile_command="&quot;$(ToolChainDir)/arm-none-eabi-g++&quot; -c $(COptions) $(CppOnlyOptions) @$(SolutionDir)/version.inc $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -fno-diagnostics-show-caret -o &quot;$(RelTargetPath)&quot;"
     external_cpp_link_command="&quot;$(ToolChainDir)/arm-none-eabi-g++&quot; $(LinkOptions) -T&quot;$(RelLinkerScriptPath)&quot; @$(RelObjectsFilePath) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
     external_link_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; $(LinkOptions) -T&quot;$(RelLinkerScriptPath)&quot; $(Objects) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
-    external_objects_file_name="tmp/$(Configuration)/o/$(ProjectName)/obj.lst"
+    external_objects_file_name="build/$(Configuration)/obj.lst"
     gcc_c_language_standard="gnu17"
     gcc_cl_c_language="None"
     gcc_cl_cpp_enable_exceptions="No"
@@ -137,6 +137,7 @@
     property_groups_file_path="$(SolutionDir)/xtras/flipper.property-groups.xml" />
   <configuration
     Name="Debug"
+    
     gdb_server_command_line="openocd -f interface/stlink.cfg -c &quot;transport select hla_swd&quot; -f &quot;$(SolutionDir)/xtras/stm32wbx.cfg&quot; -c &quot;stm32wbx.cpu configure -rtos auto&quot; -c &quot;init&quot;"
     inherited_configurations="Internal;Flags: Debug;FlipperF7;Debugger: OpenOCD over ST-LINK" />
   <configuration
