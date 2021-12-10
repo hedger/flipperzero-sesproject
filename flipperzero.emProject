@@ -39,14 +39,13 @@
     debug_memory_upload_page_size="4096"
     debug_restrict_memory_access="No"
     debug_start_from_entry_point_symbol="No"
-    debug_target_connection="GDB Server"
+    debug_target_connection="J-Link"
     debug_terminal_log_file="debugger.log"
     debug_threads_max="32"
     hidden="Yes"
     speed="0" />
   <configuration
     Name="Debugger: OpenOCD over ST-LINK"
-    _gdb_server_reset_command="reset halt"
     debug_enable_RTT="No"
     debug_initial_breakpoint_set_option="Only With No Breakpoints Set"
     debug_leave_target_running="Yes"
@@ -58,14 +57,14 @@
     debug_threads_max="32"
     gdb_server_allow_memory_access_during_execution="Yes"
     gdb_server_autostart_server="Yes"
-    gdb_server_command_line="openocd -f interface/stlink.cfg -c &quot;transport select hla_swd&quot; -f &quot;$(SolutionDir)/../debug/stm32wbx.cfg&quot; -c &quot;stm32wbx.cpu configure -rtos auto&quot; -c &quot;init&quot;"
+    gdb_server_command_line="openocd -f interface/stlink.cfg -c &quot;transport select hla_swd&quot; -f &quot;xtras/stm32wbx.cfg&quot; -c &quot;stm32wbx.cpu configure -rtos auto&quot; -c &quot;init&quot;"
     gdb_server_connect_timeout="3"
     gdb_server_ignore_checksum_errors="No"
     gdb_server_log_file="ses_gdb.log"
     gdb_server_port="3333"
     gdb_server_read_timeout="20"
     gdb_server_register_access="General and Individual"
-    gdb_server_reset_command=""
+    gdb_server_reset_command="reset halt"
     gdb_server_type="OpenOCD"
     gdb_server_write_timeout="20"
     hidden="Yes"
@@ -97,7 +96,7 @@
     armgnu_cl_fpabi="hard"
     armgnu_cl_fpu="fpv4-sp-d16"
     asm_additional_options="-x assembler-with-cpp"
-    build_intermediate_directory="tmp/$(Configuration)/o/$(ProjectName)"
+    build_intermediate_directory="build/$(Configuration)/"
     build_output_directory="$(Configuration)"
     build_output_file_name="$(OutDir)/flipper-z-$(FlipperHwRev)-$(ProjectName)-local$(EXE)"
     build_remove_unused_symbols="Yes"
@@ -138,6 +137,7 @@
     property_groups_file_path="$(SolutionDir)/xtras/flipper.property-groups.xml" />
   <configuration
     Name="Debug"
+    gdb_server_command_line="openocd -f interface/stlink.cfg -c &quot;transport select hla_swd&quot; -f &quot;$(SolutionDir)/xtras/stm32wbx.cfg&quot; -c &quot;stm32wbx.cpu configure -rtos auto&quot; -c &quot;init&quot;"
     inherited_configurations="Internal;Flags: Debug;FlipperF7;Debugger: OpenOCD over ST-LINK" />
   <configuration
     Name="Release"
@@ -330,6 +330,7 @@
       armgnu_cl_cpu="cortex-m4"
       armgnu_cl_endian="little"
       armgnu_cl_fpu="fpv4-sp-d16"
+      batch_build_configurations="Debug;Release"
       build_generic_options_file_name="$(StudioDir)/targets/ARMGNU_build_options.xml"
       c_additional_options="-mcpu=cortex-m4;-Og;-g;-fdata-sections;-ffunction-sections;-fno-math-errno;-fstack-usage;-MMD;-MP;-Wall;-mfloat-abi=hard"
       c_preprocessor_definitions="BOOT_ADDRESS=0x08000000;FW_ADDRESS=0x08008000;OS_OFFSET=0x00008000;FLASH_ADDRESS=0x08000000;STM32WB55xx;USE_FULL_LL_DRIVER;SLIM_BOOTLOADER"
