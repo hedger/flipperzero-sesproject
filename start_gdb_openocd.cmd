@@ -1,0 +1,1 @@
+openocd -f interface/stlink.cfg -c "transport select hla_swd" -f "./xtras/stm32wbx.cfg" -c "stm32wbx.cpu configure -rtos auto" -c "init"
