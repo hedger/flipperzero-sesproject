@@ -137,8 +137,6 @@
     property_groups_file_path="$(SolutionDir)/xtras/flipper.property-groups.xml" />
   <configuration
     Name="Debug"
-    
-    gdb_server_command_line="openocd -f interface/stlink.cfg -c &quot;transport select hla_swd&quot; -f &quot;$(SolutionDir)/xtras/stm32wbx.cfg&quot; -c &quot;stm32wbx.cpu configure -rtos auto&quot; -c &quot;init&quot;"
     inherited_configurations="Internal;Flags: Debug;FlipperF7;Debugger: OpenOCD over ST-LINK" />
   <configuration
     Name="Release"

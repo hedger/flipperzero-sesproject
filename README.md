@@ -1,6 +1,6 @@
 # Segger Embedded Studio project for Flipper Zero firmware
 
-## Настройки
+## Установка
 ### Зависимости
 
 0. Добавить данный репозиторий в качестве сабмодуля в корень локальной копии репозитория `flipperzero-firmware`
