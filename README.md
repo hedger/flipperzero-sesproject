@@ -7,6 +7,7 @@
 1. Установить [Segger Embedded Studio for ARM](https://www.segger.com/downloads/embedded-studio)
 2. Установить [gcc-arm-eabi-none](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads) 
 3. Скачать [OpenOCD](https://gnutoolchains.com/arm-eabi/openocd/) и добавить в PATH
+4. Python 2+ для скрипта автоматического обновления версии сборки
 
 ### Настройка SES
 5. Tools > Options > Building: 
