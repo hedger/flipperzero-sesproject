@@ -31,7 +31,16 @@ defines = [
   '-DVERSION=\\"%s\\"' % version
 ]
 
-with open('version.inc', 'w') as file:
-  file.write(' '.join(defines))
 
-os.utime('../lib/toolbox/version.c', None)
+new_defines = ' '.join(defines)
+
+with open('version.inc', 'r') as file:
+  current_defines = file.read()
+
+if current_defines != new_defines:
+  with open('version.inc', 'w') as file:
+    file.write(new_defines)
+  os.utime('../lib/toolbox/version.c', None)
+  print("Version information updated")
+else:
+  print("Version information hasn't changed")
