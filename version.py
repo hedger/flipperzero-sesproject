@@ -33,9 +33,13 @@ defines = [
 
 
 new_defines = ' '.join(defines)
+current_defines = None
 
-with open('version.inc', 'r') as file:
-  current_defines = file.read()
+try:
+  with open('version.inc', 'r') as file:
+    current_defines = file.read()
+except FileNotFoundError:
+  pass
 
 if current_defines != new_defines:
   with open('version.inc', 'w') as file:
