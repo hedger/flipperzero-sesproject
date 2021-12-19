@@ -1,13 +1,15 @@
 # Segger Embedded Studio project for Flipper Zero firmware
 
 ## Установка
-### Зависимости
 
 0. Добавить данный репозиторий в качестве сабмодуля в корень локальной копии репозитория `flipperzero-firmware`
 ```
 git submodule add https://github.com/hedger/flipperzero-sesproject.git sesproject
 git submodule update --init --recursive
 ```
+
+### Зависимости
+
 1. Установить [Segger Embedded Studio for ARM](https://www.segger.com/downloads/embedded-studio)
 2. Установить [gcc-arm-eabi-none](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads) 
 3. Скачать [OpenOCD](https://gnutoolchains.com/arm-eabi/openocd/) и добавить в PATH
@@ -74,7 +76,7 @@ SES использует концепцию "конфигураций" для ф
 
 * Файл проекта `flipperzero.emSession` - простой XML, многие опции проще править руками прямо в нём, чем разбираться с выбором конфигурации в интерфейсе SES.
 
-* Дейфайны для `firmware` с флагами и выбором приложений редактируются либо прямо в файле проекта, либо через SES:
+* Дефайны для `firmware` с флагами и выбором приложений редактируются либо прямо в файле проекта, либо через SES:
 	- выбрать проект в дереве солюшена, открыть свойства;
 	- выбрать конфигурацию "Common";
 	- отредактировать Code > Preprocessor > Preprocessor Definitions.
