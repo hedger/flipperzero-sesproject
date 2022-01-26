@@ -137,7 +137,7 @@
     property_groups_file_path="$(SolutionDir)/xtras/flipper.property-groups.xml" />
   <configuration
     Name="Debug"
-    inherited_configurations="Internal;Flags: Debug;FlipperF7;Debugger: OpenOCD over ST-LINK" />
+    inherited_configurations="Internal;Flags: Debug;Debugger: OpenOCD over ST-LINK;FlipperF7" />
   <configuration
     Name="Release"
     inherited_configurations="Internal;Flags: Release;FlipperF7;Debugger: OpenOCD over ST-LINK" />
@@ -305,6 +305,7 @@
                     <file file_name="../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble/core/auto/ble_gatt_aci.c" />
                     <file file_name="../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble/core/auto/ble_hal_aci.c" />
                     <file file_name="../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble/core/auto/ble_hci_le.c" />
+                    <file file_name="../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble/core/auto/ble_l2cap_aci.c" />
                   </folder>
                 </folder>
               </folder>
