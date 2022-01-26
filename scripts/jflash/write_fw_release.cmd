@@ -1,0 +1,1 @@
+JFlash.exe -openprjflash-dbg.jflash -open..\..\firmware\Release\flipper-z-f7-firmware-local.bin,0x08008000 -auto -exit
