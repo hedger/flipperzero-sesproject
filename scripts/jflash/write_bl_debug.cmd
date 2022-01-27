@@ -1,0 +1,1 @@
+JFlash.exe -openprjflash_fw.jflash -open..\..\bootloader\Debug\flipper-z-f7-bootloader-local.bin,0x08000000 -auto -exit
