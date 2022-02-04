@@ -335,7 +335,7 @@
       build_generic_options_file_name="$(StudioDir)/targets/ARMGNU_build_options.xml"
       c_additional_options="-mcpu=cortex-m4;-Og;-g;-fdata-sections;-ffunction-sections;-fno-math-errno;-fstack-usage;-MMD;-MP;-Wall;-mfloat-abi=hard"
       c_preprocessor_definitions="BOOT_ADDRESS=0x08000000;FW_ADDRESS=0x08008000;OS_OFFSET=0x00008000;FLASH_ADDRESS=0x08000000;STM32WB55xx;USE_FULL_LL_DRIVER;SLIM_BOOTLOADER"
-      c_user_include_directories="../..;../../lib/drivers;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../lib/STM32CubeWB/Drivers/CMSIS/Include;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../lib/u8g2;../../bootloader/targets/$(FlipperHwRev)/furi_hal;../../bootloader/targets/furi_hal_include"
+      c_user_include_directories="../..;../../lib/drivers;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../lib/STM32CubeWB/Drivers/CMSIS/Include;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../lib/u8g2;../../bootloader/targets/$(FlipperHwRev)/furi_hal;../../bootloader/targets/furi_hal_include;../../bootloader/targets/$(FlipperHwRev)/fatfs;../../lib;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../bootloader/targets/$(FlipperHwRev)/hw;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/shci;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/tl;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN"
       debug_threads_script=""
       external_assemble_command1="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -x assembler-with-cpp  -c $(AsmOptions) $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -fno-diagnostics-show-caret -o &quot;$(RelTargetPath)&quot;"
       external_link_command1="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; $(LinkOptions) $(Objects) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
@@ -347,7 +347,6 @@
       project_can_build_in_parallel="Yes"
       project_directory="bootloader"
       project_type="Executable" />
-    <file file_name="../../bootloader/src/main.c" />
     <folder Name="f6" path="../../bootloader/targets/f6" recurse="Yes">
       <configuration Name="FlipperF7" build_exclude_from_build="Yes" />
     </folder>
@@ -363,8 +362,24 @@
       <file file_name="../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Source/Templates/system_stm32wbxx.c" />
       <file file_name="../../lib/drivers/lp5562.c" />
       <file file_name="../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Source/Templates/gcc/startup_stm32wb55xx_cm4.s" />
+      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_crc.c" />
+      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_crc.c" />
+      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_crc_ex.c" />
+    </folder>
+    <folder Name="lib">
+      <folder
+        Name="fatfs"
+        exclude="cc*"
+        path="../../lib/fatfs"
+        recurse="Yes" />
     </folder>
     <file file_name="../../lib/toolbox/version.c" />
     <configuration Name="Release" gcc_optimization_level="Level 2 for size" />
+    <folder
+      Name="src"
+      exclude=""
+      filter=""
+      path="../../bootloader/src/"
+      recurse="Yes" />
   </project>
 </solution>
