@@ -18,6 +18,17 @@
     link_keep_lto_files="Yes"
     link_time_optimization="Yes" />
   <configuration
+    Name="Flags: Compact"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_cl_enable_debug_info="No"
+    gcc_cl_optimization_level="Size"
+    gcc_debugging_level="None"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 2 for size"
+    hidden="Yes"
+    link_keep_lto_files="Yes"
+    link_time_optimization="Yes" />
+  <configuration
     FLIPPER_PLATFORM="F6"
     Name="FlipperF6"
     c_preprocessor_definitions="TARGET=6"
@@ -167,6 +178,9 @@
     <configuration
       Name="Release"
       c_preprocessor_definitions="__FL_SERVICES__;SRV_BT;SRV_CLI;SRV_DIALOGS;SRV_DOLPHIN;SRV_GUI;SRV_INPUT;SRV_LOADER;SRV_NOTIFICATION;SRV_POWER;SRV_POWER_OBSERVER;SRV_RPC;SRV_STORAGE;__FL_APPS__;SRV_DESKTOP;APP_ARCHIVE;APP_GPIO;APP_IBUTTON;APP_IRDA;APP_LF_RFID;APP_NFC;APP_SUBGHZ;APP_ABOUT;APP_PASSPORT;__FL_PLUGINS__;APP_MUSIC_PLAYER;APP_SNAKE_GAME;__FL_DEBUG__;APP_ACCESSOR;APP_BLINK;APP_IRDA_MONITOR;APP_KEYPAD_TEST;APP_SD_TEST;APP_VIBRO_TEST;APP_USB_TEST;APP_DISPLAY_TEST;APP_BLE_HID;APP_USB_MOUSE;APP_BAD_USB;APP_U2F;APP_UART_ECHO;__FL_EXTRA__;PLUGIN_FLASH_MANAGER;APP_ELF_LOADER" />
+    <configuration
+      Name="MinRelease"
+      c_preprocessor_definitions="__FL_SERVICES__;SRV_GUI;SRV_INPUT;SRV_NOTIFICATION;SRV_STORAGE;FURI_RAM_EXEC" />
     <folder
       Name="applications"
       filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s"
@@ -315,6 +329,9 @@
       </folder>
       <folder Name="u8g2" path="../../lib/u8g2" recurse="Yes" />
     </folder>
+    <configuration
+      Name="RAM Exec"
+      link_linker_script_file="../../firmware/targets/$(FlipperHwRev)/stm32wb55xx_ram_fw.ld" />
   </project>
   <project Name="bootloader">
     <configuration
@@ -382,4 +399,8 @@
       path="../../bootloader/src/"
       recurse="Yes" />
   </project>
+  <configuration
+    Name="MinRelease"
+    inherited_configurations="FlipperF7;Debugger: JLINK;Flags: Compact" />
+  <configuration Name="RAM Exec" hidden="Yes" />
 </solution>
