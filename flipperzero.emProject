@@ -3,7 +3,7 @@
   <configuration
     Name="Flags: Debug"
     _gcc_debugging_level="Level 3"
-    c_preprocessor_definitions="FURI_DEBUG;NDEBUG;"
+    c_preprocessor_definitions="FURI_DEBUG;DEBUG;"
     gcc_cl_optimization_level="Debug"
     gcc_optimization_level="None"
     hidden="Yes" />
@@ -104,7 +104,7 @@
     c_asm_additional_options="-x assembler-with-cpp"
     c_only_additional_options="-std=gnu17"
     clang_gnu_version="None"
-    debug_register_definition_file="$(SolutionDir)/xtras/STM32WBxx_CM4_Registers.xml"
+    debug_register_definition_file="$(SolutionDir)/../debug/STM32WB55_CM4.svd"
     debug_threads_script="$(StudioDir)/samples/FreeRTOSPlugin_CM4.js"
     external_assemble_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -c $(AsmOptions) @$(SolutionDir)/version.inc $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -o &quot;$(RelTargetPath)&quot;"
     external_c_compile_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -c $(COptions) $(COnlyOptions) @$(SolutionDir)/version.inc -DBUILD_DATE=\&quot;$(DateDay)-$(DateMonth)-$(DateYear)\&quot; $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -fno-diagnostics-show-caret -o &quot;$(RelTargetPath)&quot;"
@@ -137,10 +137,10 @@
     property_groups_file_path="$(SolutionDir)/xtras/flipper.property-groups.xml" />
   <configuration
     Name="Debug"
-    inherited_configurations="Internal;Flags: Debug;Debugger: OpenOCD over ST-LINK;FlipperF7" />
+    inherited_configurations="Internal;Flags: Debug;FlipperF7;Debugger: JLINK" />
   <configuration
     Name="Release"
-    inherited_configurations="Internal;Flags: Release;FlipperF7;Debugger: OpenOCD over ST-LINK" />
+    inherited_configurations="Internal;Flags: Release;FlipperF7;Debugger: JLINK" />
   <project Name="firmware">
     <configuration
       BUILD_OPTIONS="ARM GNU"
@@ -335,7 +335,7 @@
       build_generic_options_file_name="$(StudioDir)/targets/ARMGNU_build_options.xml"
       c_additional_options="-mcpu=cortex-m4;-Og;-g;-fdata-sections;-ffunction-sections;-fno-math-errno;-fstack-usage;-MMD;-MP;-Wall;-mfloat-abi=hard"
       c_preprocessor_definitions="BOOT_ADDRESS=0x08000000;FW_ADDRESS=0x08008000;OS_OFFSET=0x00008000;FLASH_ADDRESS=0x08000000;STM32WB55xx;USE_FULL_LL_DRIVER;SLIM_BOOTLOADER"
-      c_user_include_directories="../..;../../lib/drivers;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../lib/STM32CubeWB/Drivers/CMSIS/Include;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../lib/u8g2;../../bootloader/targets/$(FlipperHwRev)/furi_hal;../../bootloader/targets/furi_hal_include"
+      c_user_include_directories="../..;../../lib/drivers;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../lib/STM32CubeWB/Drivers/CMSIS/Include;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../lib/u8g2;../../bootloader/targets/$(FlipperHwRev)/furi_hal;../../bootloader/targets/$(FlipperHwRev)/hw;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/shci;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/tl;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/utilities;../../bootloader/targets/furi_hal_include;../../bootloader/targets/$(FlipperHwRev)/fatfs;../../lib/fatfs;../../lib"
       debug_threads_script=""
       external_assemble_command1="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -x assembler-with-cpp  -c $(AsmOptions) $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -fno-diagnostics-show-caret -o &quot;$(RelTargetPath)&quot;"
       external_link_command1="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; $(LinkOptions) $(Objects) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
@@ -347,7 +347,6 @@
       project_can_build_in_parallel="Yes"
       project_directory="bootloader"
       project_type="Executable" />
-    <file file_name="../../bootloader/src/main.c" />
     <folder Name="f6" path="../../bootloader/targets/f6" recurse="Yes">
       <configuration Name="FlipperF7" build_exclude_from_build="Yes" />
     </folder>
@@ -360,11 +359,44 @@
       <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_i2c.c" />
       <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_spi.c" />
       <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_utils.c" />
+      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_crc.c" />
+      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_crc_ex.c" />
+      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_hsem.c" />
       <file file_name="../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Source/Templates/system_stm32wbxx.c" />
       <file file_name="../../lib/drivers/lp5562.c" />
       <file file_name="../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Source/Templates/gcc/startup_stm32wb55xx_cm4.s" />
+      <folder Name="shci">
+        <file file_name="../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/shci/shci.c" />
+        <file file_name="../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/tl/shci_tl.c" />
+      </folder>
     </folder>
     <file file_name="../../lib/toolbox/version.c" />
+    <folder Name="lib">
+      <folder
+        Name="fatfs"
+        exclude="cc*"
+        path="../../lib/fatfs"
+        recurse="Yes" />
+    </folder>
     <configuration Name="Release" gcc_optimization_level="Level 2 for size" />
+    <folder
+      Name="src"
+      exclude=""
+      filter="*.*"
+      path="..\..\bootloader\src"
+      recurse="Yes" />
+    <folder
+      Name="hal_include"
+      exclude=""
+      filter=""
+      path="../../bootloader/targets/furi_hal_include"
+      recurse="Yes" />
+    <configuration
+      Name="BL in RAM"
+      link_linker_script_file="../../bootloader/targets/$(FlipperHwRev)/stm32wb55xx_bl_ram.ld" />
   </project>
+  <configuration Name="BL in RAM" hidden="Yes" />
+  <configuration
+    Name="Release - RAM BL"
+    inherited_configurations="BL in RAM;Debugger: JLINK;Flags: Release" />
 </solution>
