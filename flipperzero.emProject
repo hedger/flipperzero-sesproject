@@ -20,7 +20,7 @@
   <configuration
     Name="Flags: Compact"
     c_preprocessor_definitions="NDEBUG"
-    gcc_cl_enable_debug_info="No"
+    _gcc_cl_enable_debug_info="No"
     gcc_cl_optimization_level="Size"
     gcc_debugging_level="None"
     gcc_omit_frame_pointer="Yes"
@@ -166,7 +166,7 @@
       external_load_address="0x8008000"
       link_linker_script_file="../../firmware/targets/$(FlipperHwRev)/stm32wb55xx_flash_cm4_with_bootloader.ld"
       link_use_linker_script_file="Yes"
-      linker_additional_options="-n;-mthumb;-specs=nano.specs;-specs=nosys.specs;-Wl,--gc-sections;-Wl,--start-group;-lstdc++;-lsupc++;-Wl,--end-group;-Wl,--undefined=uxTopUsedPriority;-Wl,--wrap,_calloc_r;-Wl,--wrap,_free_r;-Wl,--wrap,_malloc_r;-Wl,--wrap,_realloc_r;-u _printf_float"
+      linker_additional_options="-n;-mthumb;-specs=nano.specs;-specs=nosys.specs;-Wl,--gc-sections;-Wl,--start-group;-lstdc++;-lsupc++;-Wl,--end-group;-Wl,--undefined=uxTopUsedPriority;-Wl,--wrap,_calloc_r;-Wl,--wrap,_free_r;-Wl,--wrap,_malloc_r;-Wl,--wrap,_realloc_r"
       project_can_build_in_parallel="Yes"
       project_directory="firmware"
       project_type="Executable"
@@ -174,9 +174,11 @@
       use_compiler_driver="No" />
     <configuration
       Name="Debug"
+      linker_additional_options="-u _printf_float"
       c_preprocessor_definitions="__FL_SERVICES__;SRV_BT;SRV_CLI;SRV_DIALOGS;SRV_DOLPHIN;SRV_GUI;SRV_INPUT;SRV_LOADER;SRV_NOTIFICATION;SRV_POWER;SRV_POWER_OBSERVER;SRV_RPC;SRV_STORAGE;__FL_APPS__;SRV_DESKTOP;APP_ARCHIVE;APP_GPIO;APP_IBUTTON;APP_IRDA;APP_LF_RFID;APP_NFC;APP_SUBGHZ;APP_ABOUT;APP_PASSPORT;__FL_PLUGINS__;APP_MUSIC_PLAYER;APP_SNAKE_GAME;__FL_DEBUG__;APP_ACCESSOR;APP_BLINK;APP_IRDA_MONITOR;APP_KEYPAD_TEST;APP_SD_TEST;APP_VIBRO_TEST;APP_USB_TEST;APP_DISPLAY_TEST;APP_BLE_HID;APP_USB_MOUSE;APP_BAD_USB;APP_U2F;APP_UART_ECHO;__FL_EXTRA__;PLUGIN_FLASH_MANAGER;APP_ELF_LOADER" />
     <configuration
       Name="Release"
+      linker_additional_options="-u _printf_float"
       c_preprocessor_definitions="__FL_SERVICES__;SRV_BT;SRV_CLI;SRV_DIALOGS;SRV_DOLPHIN;SRV_GUI;SRV_INPUT;SRV_LOADER;SRV_NOTIFICATION;SRV_POWER;SRV_POWER_OBSERVER;SRV_RPC;SRV_STORAGE;__FL_APPS__;SRV_DESKTOP;APP_ARCHIVE;APP_GPIO;APP_IBUTTON;APP_IRDA;APP_LF_RFID;APP_NFC;APP_SUBGHZ;APP_ABOUT;APP_PASSPORT;__FL_PLUGINS__;APP_MUSIC_PLAYER;APP_SNAKE_GAME;__FL_DEBUG__;APP_ACCESSOR;APP_BLINK;APP_IRDA_MONITOR;APP_KEYPAD_TEST;APP_SD_TEST;APP_VIBRO_TEST;APP_USB_TEST;APP_DISPLAY_TEST;APP_BLE_HID;APP_USB_MOUSE;APP_BAD_USB;APP_U2F;APP_UART_ECHO;__FL_EXTRA__;PLUGIN_FLASH_MANAGER;APP_ELF_LOADER" />
     <configuration
       Name="MinRelease"
