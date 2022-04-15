@@ -2,6 +2,7 @@
 
 import subprocess
 import os
+from datetime import date
 
 def exec_git(args):
   cmd = ['git']
@@ -10,14 +11,17 @@ def exec_git(args):
 
 commit = exec_git('rev-parse --short HEAD') or 'unknown'
 
+dirty = False
 try:
   exec_git('diff --quiet')
 except subprocess.CalledProcessError as e:
   if e.returncode == 1:
+    dirty = True
     commit += '-dirty'
 
 branch = exec_git('rev-parse --abbrev-ref HEAD') or 'unknown'
 branch_num = exec_git('rev-list --count HEAD') or 'n/a'
+build_date = date.today().isoformat()
 
 try:
   version = exec_git('describe --tags --abbrev=0 --exact-match')
@@ -28,7 +32,9 @@ defines = [
   '-DGIT_COMMIT=\\"%s\\"' % commit,
   '-DGIT_BRANCH=\\"%s\\"' % branch,
   '-DGIT_BRANCH_NUM=\\"%s\\"' % branch_num,
-  '-DVERSION=\\"%s\\"' % version
+  '-DVERSION=\\"%s\\"' % version,
+  '-DBUILD_DATE=\\"%s\\"' % build_date,
+  '-DBUILD_DIRTY=%s' % (dirty and 1 or 0)
 ]
 
 

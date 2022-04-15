@@ -1,39 +1,71 @@
 <!DOCTYPE CrossStudio_Project_File>
 <solution Name="Flipper" target="8" version="2">
   <configuration
-    Name="Flags: Debug"
-    _gcc_debugging_level="Level 3"
-    c_preprocessor_definitions="FURI_DEBUG;NDEBUG;"
-    gcc_cl_optimization_level="Debug"
-    gcc_optimization_level="None"
-    hidden="Yes" />
+    BUILD_OPTIONS="ARM GNU"
+    LIBRARY_IO_TYPE="RTT"
+    Name="Toolchain: GCC-10"
+    arm_architecture="v7EM"
+    arm_compiler_variant="gcc"
+    arm_core_type="Cortex-M4"
+    arm_fp_abi="Hard"
+    arm_fpu_type="FPv4-SP-D16"
+    arm_library_architecture="v7EM"
+    arm_library_optimization="Small"
+    arm_linker_heap_size="512"
+    arm_linker_process_stack_size="0"
+    arm_linker_stack_size="1024"
+    arm_linker_variant="GNU"
+    arm_rtl_variant="SEGGER"
+    arm_simulator_memory_simulation_parameter="ROM;0x08000000;0x01000000;RAM;0x20000000;0x00040000"
+    arm_target_debug_interface_type="ADIv5"
+    arm_target_device_name="STM32WB55xx"
+    arm_target_interface_type="SWD"
+    armgnu_cl_cpu="cortex-m4"
+    armgnu_cl_fpabi="hard"
+    armgnu_cl_fpu="fpv4-sp-d16"
+    asm_additional_options="-x assembler-with-cpp"
+    build_intermediate_directory="build/$(Configuration)/"
+    build_object_file_name="$(IntDir)/$(FolderName)-$(InputName)$(OBJ)"
+    build_output_directory="$(Configuration)"
+    build_output_file_name="$(OutDir)/flipper-z-$(FlipperHwRev)-$(ProjectName)-local$(EXE)"
+    build_remove_unused_symbols="Yes"
+    build_toolchain_directory="$(GCCRoot)"
+    c_additional_options="--specs=nano.specs;--specs=nosys.specs;-Wno-address-of-packed-member;-Wno-missing-field-initializers;-Wno-unused-parameter;-fno-diagnostics-show-caret;-mthumb;-fdata-sections;-ffunction-sections;-fno-math-errno;-fstack-usage;-Wall;-Wextra;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-mlittle-endian"
+    c_asm_additional_options="-x assembler-with-cpp"
+    c_only_additional_options="-std=gnu17;-Werror=implicit-function-declaration"
+    c_preprocessor_definitions="__STM32WBxx_FAMILY;__STM32WB55_SUBFAMILY;ARM_MATH_CM4;STM32WB;USB_PMASIZE=0x400;STM32WB55xx;_GNU_SOURCE;"
+    clang_tidy_checks_c="clang-analyzer-*;-clang-analyzer-cplusplus*;cppcoreguidelines-*;readability-*;-clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling;-readability-function-cognitive-complexity"
+    clang_tidy_checks_cpp="clang-analyzer-*;cppcoreguidelines-*;readability-*;-clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling;-readability-function-cognitive-complexity"
+    cpp_only_additional_options="-fno-rtti -fno-use-cxa-atexit -fno-exceptions -fno-threadsafe-statics"
+    external_assemble_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -c $(AsmOptions) @$(SolutionDir)/version.inc $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -o &quot;$(RelTargetPath)&quot;"
+    external_c_compile_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -c $(COptions) $(COnlyOptions) @$(SolutionDir)/version.inc $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -o &quot;$(RelTargetPath)&quot;"
+    external_cpp_compile_command="&quot;$(ToolChainDir)/arm-none-eabi-g++&quot; -c $(COptions) $(CppOnlyOptions) @$(SolutionDir)/version.inc $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -o &quot;$(RelTargetPath)&quot;"
+    external_cpp_link_command="&quot;$(ToolChainDir)/arm-none-eabi-g++&quot; $(LinkOptions) -T&quot;$(RelLinkerScriptPath)&quot; @$(RelObjectsFilePath) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
+    external_link_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; $(LinkOptions) -T&quot;$(RelLinkerScriptPath)&quot; $(Objects) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
+    external_objects_file_name="build/$(Configuration)/obj.lst"
+    hidden="Yes"
+    linker_additional_options="-n;-mthumb;-specs=nano.specs;-specs=nosys.specs;-mcpu=cortex-m4;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-mlittle-endian;-Wl,--gc-sections;-Wl,--start-group;-lstdc++;-lsupc++;-Wl,--end-group;-Wl,--undefined=uxTopUsedPriority;-Wl,--wrap,_calloc_r;-Wl,--wrap,_free_r;-Wl,--wrap,_malloc_r;-Wl,--wrap,_realloc_r"
+    linker_post_build_command="&quot;$(ToolChainDir)/arm-none-eabi-objcopy&quot; &quot;$(RelTargetPath)&quot; &quot;$(PostLinkOutputFilePath)&quot; -Obinary"
+    linker_post_build_command_output_file="$(OutDir)/flipper-z-$(FlipperHwRev)-$(ProjectName)-local.bin"
+    pre_build_command="python ./version.py"
+    pre_build_command_wd="$(SolutionDir)" />
+  <configuration
+    Name="Toolchain: clang-13-embedded"
+    hidden="Yes"
+    pre_build_command="python ./version.py"
+    pre_build_command_wd="$(SolutionDir)" />
   <configuration
     Name="Flags: Release"
-    c_preprocessor_definitions="NDEBUG"
-    gcc_cl_optimization_level="Size"
-    gcc_debugging_level="None"
-    gcc_omit_frame_pointer="Yes"
-    gcc_optimization_level="Level 2 balanced"
-    hidden="Yes"
-    link_keep_lto_files="Yes"
-    link_time_optimization="Yes" />
+    c_additional_options="-Os;-g;-gdwarf-4;"
+    c_preprocessor_definitions="FURI_NDEBUG;NDEBUG"
+    linker_additional_options="-u _printf_float"
+    hidden="Yes" />
   <configuration
-    Name="Flags: Compact"
-    c_preprocessor_definitions="NDEBUG"
-    _gcc_cl_enable_debug_info="No"
-    gcc_cl_optimization_level="Size"
-    gcc_debugging_level="None"
-    gcc_omit_frame_pointer="Yes"
-    gcc_optimization_level="Level 2 for size"
-    hidden="Yes"
-    link_keep_lto_files="Yes"
-    link_time_optimization="Yes" />
-  <configuration
-    FLIPPER_PLATFORM="F6"
-    Name="FlipperF6"
-    c_preprocessor_definitions="TARGET=6"
-    hidden="Yes"
-    macros="FlipperHwRev=f6" />
+    Name="Flags: Debug"
+    c_additional_options="-Og;-g;-gdwarf-4;"
+    c_preprocessor_definitions="FURI_DEBUG;NDEBUG;"
+    linker_additional_options="-u _printf_float"
+    hidden="Yes" />
   <configuration
     FLIPPER_PLATFORM="F7"
     Name="FlipperF7"
@@ -41,8 +73,12 @@
     hidden="Yes"
     macros="FlipperHwRev=f7" />
   <configuration
-    Name="Extra Flipper FW definitions"
-    c_preprocessor_definitions="FLASHMGR_MOCK"
+    Name="RAM Exec"
+    build_output_file_name="
+    $(OutDir)/flipper-z-$(FlipperHwRev)-$(ProjectName)-ram-local$(EXE)"
+    linker_additional_options="-u _printf_float"
+    c_preprocessor_definitions="VECT_TAB_SRAM;FLIPPER_STREAM_LITE"
+    linker_post_build_command_output_file="$(OutDir)/flipper-z-$(FlipperHwRev)-$(ProjectName)-ram-local.bin"
     hidden="Yes" />
   <configuration
     Name="Debugger: JLINK"
@@ -85,141 +121,69 @@
     Name="Common"
     THREAD_SCRIPT="FreeRTOS CM4"
     Target="STM32WB55RGVx"
-    arm_architecture="v7EM"
-    arm_compiler_variant="gcc"
-    arm_core_type="Cortex-M4"
-    arm_endian="Little"
-    arm_fp_abi="Hard"
-    arm_fpu_type="FPv4-SP-D16"
-    arm_library_architecture="v7EM"
-    arm_library_optimization="Small"
-    arm_linker_heap_size="512"
-    arm_linker_process_stack_size="0"
-    arm_linker_stack_size="1024"
-    arm_linker_variant="GNU"
-    arm_rtl_variant="SEGGER"
-    arm_simulator_memory_simulation_parameter="ROM;0x08000000;0x01000000;RAM;0x20000000;0x00040000"
-    arm_target_debug_interface_type="ADIv5"
-    arm_target_device_name="STM32WB55xx"
-    arm_target_interface_type="SWD"
-    armgnu_cl_cpu="cortex-m4"
-    armgnu_cl_endian="little"
-    armgnu_cl_fpabi="hard"
-    armgnu_cl_fpu="fpv4-sp-d16"
-    asm_additional_options="-x assembler-with-cpp"
-    build_intermediate_directory="build/$(Configuration)/"
-    build_output_directory="$(Configuration)"
-    build_output_file_name="$(OutDir)/flipper-z-$(FlipperHwRev)-$(ProjectName)-local$(EXE)"
-    build_remove_unused_symbols="Yes"
-    c_additional_options="-mthumb;-fdata-sections;-ffunction-sections;-fno-math-errno;-fstack-usage;"
-    c_asm_additional_options="-x assembler-with-cpp"
-    c_only_additional_options="-std=gnu17"
-    clang_gnu_version="None"
+    arm_target_device_name="STM32WB55RGVx"
     debug_register_definition_file="$(SolutionDir)/xtras/STM32WBxx_CM4_Registers.xml"
     debug_threads_script="$(StudioDir)/samples/FreeRTOSPlugin_CM4.js"
-    external_assemble_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -c $(AsmOptions) @$(SolutionDir)/version.inc $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -o &quot;$(RelTargetPath)&quot;"
-    external_c_compile_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -c $(COptions) $(COnlyOptions) @$(SolutionDir)/version.inc -DBUILD_DATE=\&quot;$(DateDay)-$(DateMonth)-$(DateYear)\&quot; $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -fno-diagnostics-show-caret -o &quot;$(RelTargetPath)&quot;"
-    external_cpp_compile_command="&quot;$(ToolChainDir)/arm-none-eabi-g++&quot; -c $(COptions) $(CppOnlyOptions) @$(SolutionDir)/version.inc $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -fno-diagnostics-show-caret -o &quot;$(RelTargetPath)&quot;"
-    external_cpp_link_command="&quot;$(ToolChainDir)/arm-none-eabi-g++&quot; $(LinkOptions) -T&quot;$(RelLinkerScriptPath)&quot; @$(RelObjectsFilePath) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
-    external_link_command="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; $(LinkOptions) -T&quot;$(RelLinkerScriptPath)&quot; $(Objects) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
-    external_objects_file_name="build/$(Configuration)/obj.lst"
-    gcc_c_language_standard="gnu17"
-    gcc_cl_c_language="None"
-    gcc_cl_cpp_enable_exceptions="No"
-    gcc_cl_cpp_enable_rtti="No"
-    gcc_cl_cpp_language="None"
-    gcc_cl_data_sections="Yes"
-    gcc_cl_enable_debug_info="Yes"
-    gcc_cl_extra_warnings="Yes"
-    gcc_cl_function_sections="Yes"
-    gcc_cl_warnings_as_errors="No"
-    gcc_cplusplus_language_standard="gnu++17"
-    gcc_entry_point="Reset_Handler"
-    gcc_optimization_level="None"
-    gcc_wchar_size="16-Bit"
-    link_include_standard_libraries="No"
-    linker_memory_map_file="$(SolutionDir)/xtras/STM32WB55RGVx_MemoryMap.xml"
-    linker_output_format="None"
-    linker_post_build_command="&quot;$(ToolChainDir)/arm-none-eabi-objcopy&quot; &quot;$(RelTargetPath)&quot; &quot;$(PostLinkOutputFilePath)&quot; -Obinary"
-    linker_post_build_command_output_file="$(OutDir)/flipper-z-$(FlipperHwRev)-$(ProjectName)-local.bin"
     macros="DeviceHeaderFile=../../lib/STM32CubeWB/Drivers/CMSIS/Device/Include/stm32wbxx.h;DeviceLibraryIdentifier=M4lf;DeviceSystemFile=../../firmware/targets/$(FlipperHwRev)/Src/system_stm32wbxx.c;DeviceFamily=STM32WBxx;DeviceSubFamily=STM32WB55;Target=STM32WB55RGVx"
-    pre_build_command="python ./version.py"
-    pre_build_command_wd="$(SolutionDir)"
     property_groups_file_path="$(SolutionDir)/xtras/flipper.property-groups.xml" />
   <configuration
     Name="Debug"
-    inherited_configurations="Internal;Flags: Debug;Debugger: OpenOCD over ST-LINK;FlipperF7" />
+    inherited_configurations="Internal;Flags: Debug;FlipperF7;Debugger: JLINK;Toolchain: GCC-10" />
   <configuration
     Name="Release"
-    inherited_configurations="Internal;Flags: Release;FlipperF7;Debugger: OpenOCD over ST-LINK" />
+    inherited_configurations="Internal;Flags: Release;FlipperF7;Debugger: JLINK;Toolchain: GCC-10" />
+  <configuration
+    Name="UpdRel"
+    inherited_configurations="Internal;Flags: Release;FlipperF7;RAM Exec;Debugger: JLINK;Toolchain: GCC-10" />
   <project Name="firmware">
     <configuration
-      BUILD_OPTIONS="ARM GNU"
-      LIBRARY_IO_TYPE="RTT"
       Name="Common"
-      build_generic_options_file_name="$(StudioDir)/targets/ARMGNU_build_options.xml"
       build_quietly="Yes"
-      c_additional_options="--specs=nano.specs;--specs=nosys.specs;-Wno-address-of-packed-member;-Wno-missing-field-initializers;-Wno-unused-parameter"
-      c_preprocessor_definitions="__STM32WBxx_FAMILY;__STM32WB55_SUBFAMILY;ARM_MATH_CM4;STM32WB;USB_PMASIZE=0x400;STM32WB55xx;USE_FULL_LL_DRIVER;USE_HAL_DRIVER;HAVE_FREERTOS;PB_ENABLE_MALLOC;_GNU_SOURCE;LFS_CONFIG=lfs_config.h;BOOT_ADDRESS=0x08000000;FW_ADDRESS=0x08008000;OS_OFFSET=0x00008000"
-      c_user_include_directories="../../assets/compiled;../../core;../../applications;../../lib;../../lib/mlib;../../lib/u8g2;../../lib/littlefs;../../lib/ST25RFAL002;../../lib/ST25RFAL002/include;../../lib/ST25RFAL002/source/st25r3916;../../lib/nfc_protocols;../../lib/callback-connector;../../lib/app-template;../../lib/app-scened-template;../../lib/fnv1a_hash;../../lib/onewire;../../lib/cyfral;../../lib/common-api;../../lib/drivers;../../lib/file_reader;../../lib/irda/encoder_decoder;../../lib/irda/worker;../../lib/libusb_stm32/inc;../../lib/nanopb;../../lib/heatshrink;../../lib/flipper_file;../../lib/micro-ecc;../../;../../firmware/targets/furi_hal_include;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc/Legacy;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../lib/STM32CubeWB/Drivers/CMSIS/Include;../../lib/STM32CubeWB/Middlewares/Third_Party/FreeRTOS/Source/include;../../lib/STM32CubeWB/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../lib/STM32CubeWB/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F;../../firmware/targets/$(FlipperHwRev)/ble_glue;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble/core;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble/core/template;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/utilities;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/tl;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/shci;../../firmware/targets/$(FlipperHwRev)/furi_hal;../../firmware/targets/$(FlipperHwRev)/Inc;../../firmware/targets/$(FlipperHwRev)/fatfs"
-      cpp_only_additional_options="-std=gnu++17;-fno-threadsafe-statics;-fno-use-cxa-atexit;-fno-exceptions;-fno-rtti"
-      external_load_address="0x8008000"
-      link_linker_script_file="../../firmware/targets/$(FlipperHwRev)/stm32wb55xx_flash_cm4_with_bootloader.ld"
+      c_preprocessor_definitions="USE_FULL_LL_DRIVER;HAVE_FREERTOS;PB_ENABLE_MALLOC;LFS_CONFIG=lfs_config.h"
+      c_user_include_directories="../../assets/compiled;../../core;../../applications;../../lib;../../lib/mlib;../../lib/u8g2;../../lib/littlefs;../../lib/ST25RFAL002;../../lib/ST25RFAL002/include;../../lib/ST25RFAL002/source/st25r3916;../../lib/nfc_protocols;../../lib/callback-connector;../../lib/app-template;../../lib/app-scened-template;../../lib/fnv1a_hash;../../lib/common-api;../../lib/drivers;../../lib/file_reader;../../lib/infrared/encoder_decoder;../../lib/infrared/worker;../../lib/libusb_stm32/inc;../../lib/nanopb;../../lib/heatshrink;../../lib/flipper_format;../../lib/micro-ecc;../../;../../firmware/targets/furi_hal_include;../../firmware/targets/furi_hal_include/boot;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc/Legacy;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../lib/STM32CubeWB/Drivers/CMSIS/Include;../../lib/STM32CubeWB/Middlewares/Third_Party/FreeRTOS/Source/include;../../lib/STM32CubeWB/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../lib/STM32CubeWB/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F;../../firmware/targets/$(FlipperHwRev)/ble_glue;../../lib/FreeRTOS-glue;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble/core;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/ble/core/template;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/utilities;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/tl;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/shci;../../firmware/targets/$(FlipperHwRev)/furi_hal;../../firmware/targets/$(FlipperHwRev)/furi_hal/boot;../../firmware/targets/$(FlipperHwRev)/Inc;../../firmware/targets/$(FlipperHwRev)/fatfs;../../lib/microtar/src"
+      external_load_address="0x8000000"
+      link_linker_script_file="../../firmware/targets/$(FlipperHwRev)/stm32wb55xx_flash.ld"
       link_use_linker_script_file="Yes"
-      linker_additional_options="-n;-mthumb;-specs=nano.specs;-specs=nosys.specs;-Wl,--gc-sections;-Wl,--start-group;-lstdc++;-lsupc++;-Wl,--end-group;-Wl,--undefined=uxTopUsedPriority;-Wl,--wrap,_calloc_r;-Wl,--wrap,_free_r;-Wl,--wrap,_malloc_r;-Wl,--wrap,_realloc_r"
       project_can_build_in_parallel="Yes"
       project_directory="firmware"
-      project_type="Executable"
-      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)"
-      use_compiler_driver="No" />
+      project_type="Executable" />
     <configuration
       Name="Debug"
-      linker_additional_options="-u _printf_float"
-      c_preprocessor_definitions="__FL_SERVICES__;SRV_BT;SRV_CLI;SRV_DIALOGS;SRV_DOLPHIN;SRV_GUI;SRV_INPUT;SRV_LOADER;SRV_NOTIFICATION;SRV_POWER;SRV_POWER_OBSERVER;SRV_RPC;SRV_STORAGE;__FL_APPS__;SRV_DESKTOP;APP_ARCHIVE;APP_GPIO;APP_IBUTTON;APP_IRDA;APP_LF_RFID;APP_NFC;APP_SUBGHZ;APP_ABOUT;APP_PASSPORT;__FL_PLUGINS__;APP_MUSIC_PLAYER;APP_SNAKE_GAME;__FL_DEBUG__;APP_ACCESSOR;APP_BLINK;APP_IRDA_MONITOR;APP_KEYPAD_TEST;APP_SD_TEST;APP_VIBRO_TEST;APP_USB_TEST;APP_DISPLAY_TEST;APP_BLE_HID;APP_USB_MOUSE;APP_BAD_USB;APP_U2F;APP_UART_ECHO;__FL_EXTRA__;PLUGIN_FLASH_MANAGER;APP_ELF_LOADER" />
+      c_preprocessor_definitions="__FL_SERVICES__;SRV_BT;SRV_CLI;SRV_DIALOGS;SRV_DOLPHIN;SRV_GUI;SRV_INPUT;SRV_LOADER;SRV_NOTIFICATION;SRV_POWER;SRV_POWER_OBSERVER;SRV_RPC;SRV_STORAGE;SRV_DESKTOP;SRV_PRE_UPDATER;__FL_APPS__;PP_ARCHIVE;APP_GPIO;APP_IBUTTON;APP_IRDA;APP_LF_RFID;APP_NFC;APP_SUBGHZ;APP_ABOUT;APP_PASSPORT;__FL_PLUGINS__;APP_MUSIC_PLAYER;APP_SNAKE_GAME;__FL_DEBUG__;APP_ACCESSOR;APP_BLINK;APP_IRDA_MONITOR;APP_KEYPAD_TEST;APP_SD_TEST;APP_VIBRO_TEST;APP_USB_TEST;APP_DISPLAY_TEST;APP_BLE_HID;APP_USB_MOUSE;APP_BAD_USB;APP_U2F;APP_UART_ECHO;APP_UPDATER;__FL_EXTRA__;PLUGIN_FLASH_MANAGER;APP_ELF_LOADER" />
     <configuration
       Name="Release"
-      linker_additional_options="-u _printf_float"
-      c_preprocessor_definitions="__FL_SERVICES__;SRV_BT;SRV_CLI;SRV_DIALOGS;SRV_DOLPHIN;SRV_GUI;SRV_INPUT;SRV_LOADER;SRV_NOTIFICATION;SRV_POWER;SRV_POWER_OBSERVER;SRV_RPC;SRV_STORAGE;__FL_APPS__;SRV_DESKTOP;APP_ARCHIVE;APP_GPIO;APP_IBUTTON;APP_IRDA;APP_LF_RFID;APP_NFC;APP_SUBGHZ;APP_ABOUT;APP_PASSPORT;__FL_PLUGINS__;APP_MUSIC_PLAYER;APP_SNAKE_GAME;__FL_DEBUG__;APP_ACCESSOR;APP_BLINK;APP_IRDA_MONITOR;APP_KEYPAD_TEST;APP_SD_TEST;APP_VIBRO_TEST;APP_USB_TEST;APP_DISPLAY_TEST;APP_BLE_HID;APP_USB_MOUSE;APP_BAD_USB;APP_U2F;APP_UART_ECHO;__FL_EXTRA__;PLUGIN_FLASH_MANAGER;APP_ELF_LOADER" />
+      c_preprocessor_definitions="__FL_SERVICES__;SRV_BT;SRV_CLI;SRV_DIALOGS;SRV_DOLPHIN;SRV_GUI;SRV_INPUT;SRV_LOADER;SRV_NOTIFICATION;SRV_POWER;SRV_POWER_OBSERVER;SRV_RPC;SRV_STORAGE;SRV_DESKTOP;SRV_PRE_UPDATER;__FL_APPS__;APP_ARCHIVE;APP_GPIO;APP_IBUTTON;APP_IRDA;APP_LF_RFID;APP_NFC;APP_SUBGHZ;APP_ABOUT;APP_PASSPORT;__FL_PLUGINS__;APP_MUSIC_PLAYER;APP_SNAKE_GAME;__FL_DEBUG__;APP_ACCESSOR;APP_BLINK;APP_IRDA_MONITOR;APP_KEYPAD_TEST;APP_SD_TEST;APP_VIBRO_TEST;APP_USB_TEST;APP_DISPLAY_TEST;APP_BLE_HID;APP_USB_MOUSE;APP_BAD_USB;APP_U2F;APP_UART_ECHO;APP_UPDATER;__FL_EXTRA__;PLUGIN_FLASH_MANAGER;APP_ELF_LOADER" />
     <configuration
-      Name="MinRelease"
-      c_preprocessor_definitions="__FL_SERVICES__;SRV_GUI;SRV_INPUT;SRV_NOTIFICATION;SRV_STORAGE;FURI_RAM_EXEC" />
+      Name="RAM Exec"
+    link_linker_script_file="../../firmware/targets/$(FlipperHwRev)/stm32wb55xx_ram_fw.ld"
+      c_preprocessor_definitions="SRV_GUI;SRV_INPUT;SRV_NOTIFICATION;SRV_STORAGE;SRV_UPDATER;FURI_RAM_EXEC" />
     <folder
       Name="applications"
-      filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s"
+      filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s;*.ld"
       path="../../applications"
       recurse="Yes" />
     <folder
-      Name="assets"
-      filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s"
-      path="../../assets"
-      recurse="Yes" />
-    <folder
       Name="core"
-      filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s"
+      filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s;*.ld"
       path="../../core"
       recurse="Yes" />
     <folder Name="firmware">
       <folder Name="targets">
         <folder
           Name="f7"
-          exclude="cube"
           filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s;*.ld"
           path="../../firmware/targets/f7"
-          recurse="Yes">
-          <configuration Name="FlipperF6" build_exclude_from_build="Yes" />
-        </folder>
+          recurse="Yes" />
         <folder
           Name="f6"
-          exclude="cube"
           filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s;*.ld"
           path="../../firmware/targets/f6"
-          recurse="Yes">
-          <configuration Name="FlipperF7" build_exclude_from_build="Yes" />
-        </folder>
+          recurse="Yes" />
         <folder
           Name="furi-hal-include"
-          path="../../firmware/targets/furi-hal-include"
-          recurse="No" />
+          filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s;*.ld"
+          path="../../firmware/targets/furi_hal_include"
+          recurse="Yes" />
       </folder>
     </folder>
     <folder Name="lib">
@@ -234,17 +198,22 @@
         path="../../lib/fatfs"
         recurse="Yes" />
       <folder
-        Name="flipper_file"
-        path="../../lib/flipper_file"
+        Name="flipper_format"
+        path="../../lib/flipper_format"
         recurse="Yes" />
       <folder Name="heatshrink" path="../../lib/heatshrink" recurse="Yes" />
-      <folder Name="irda" path="../../lib/irda" recurse="Yes" />
+      <folder Name="infrared" path="../../lib/infrared" recurse="Yes" />
       <folder
         Name="libusb_stm32"
         filter="*usbd_stm32wb55*;*core*"
         path="../../lib/libusb_stm32"
         recurse="Yes" />
-      <folder Name="littlefs" path="../../lib/littlefs" recurse="Yes" />
+      <folder
+        Name="littlefs"
+        exclude=""
+        filter=""
+        path="../../lib/littlefs"
+        recurse="No" />
       <folder
         Name="nanopb"
         filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s;*.ld"
@@ -254,10 +223,19 @@
         Name="nfc_protocols"
         path="../../lib/nfc_protocols"
         recurse="Yes" />
-      <folder Name="onewire" path="../../lib/onewire" recurse="Yes" />
+      <folder Name="microtar" path="../../lib/microtar/src" recurse="Yes" />
+      <folder Name="assets" path="../../assets/compiled" recurse="Yes" />
+      <folder Name="update_util" path="../../lib/update_util" recurse="Yes" />
       <folder Name="subghz" path="../../lib/subghz" recurse="Yes" />
       <folder Name="toolbox" path="../../lib/toolbox" recurse="Yes" />
       <folder Name="micro-ecc" path="../../lib/micro-ecc" recurse="Yes" />
+      <folder Name="one_wire" path="../../lib/one_wire" recurse="Yes" />
+      <folder
+        Name="blocksruntime"
+        exclude=""
+        filter="*.c;*.h"
+        path="../../lib/blocksruntime/BlocksRuntime"
+        recurse="No" />
       <folder
         Name="ST25RFAL002"
         filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s;*.ld"
@@ -267,7 +245,7 @@
         <folder Name="Drivers">
           <folder
             Name="STM32WBxx_HAL_Driver"
-            exclude="*_template*"
+            exclude="*_template*;*_hal*;*_ll_usb*"
             filter="*.c;*.cpp;*.h;*.hpp;*.d;*.inc;*.s;*.ld"
             path="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver"
             recurse="Yes" />
@@ -330,79 +308,14 @@
         </folder>
       </folder>
       <folder Name="u8g2" path="../../lib/u8g2" recurse="Yes" />
-    </folder>
-    <configuration
-      Name="RAM Exec"
-      link_linker_script_file="../../firmware/targets/$(FlipperHwRev)/stm32wb55xx_ram_fw.ld" />
-  </project>
-  <project Name="bootloader">
-    <configuration
-      BUILD_OPTIONS="ARM GNU"
-      Name="Common"
-      THREAD_SCRIPT="None"
-      arm_architecture="v7EM"
-      arm_core_type="Cortex-M4"
-      arm_endian="Little"
-      arm_fpu_type="FPv4-SP-D16"
-      arm_simulator_memory_simulation_parameter="RX 08000000,00100000,FFFFFFFF;RWX 20000000,00030000,CDCDCDCD"
-      arm_target_device_name="STM32WB55RG"
-      arm_target_interface_type="SWD"
-      armgnu_cl_cpu="cortex-m4"
-      armgnu_cl_endian="little"
-      armgnu_cl_fpu="fpv4-sp-d16"
-      batch_build_configurations="Debug;Release"
-      build_generic_options_file_name="$(StudioDir)/targets/ARMGNU_build_options.xml"
-      c_additional_options="-mcpu=cortex-m4;-Og;-g;-fdata-sections;-ffunction-sections;-fno-math-errno;-fstack-usage;-MMD;-MP;-Wall;-mfloat-abi=hard"
-      c_preprocessor_definitions="BOOT_ADDRESS=0x08000000;FW_ADDRESS=0x08008000;OS_OFFSET=0x00008000;FLASH_ADDRESS=0x08000000;STM32WB55xx;USE_FULL_LL_DRIVER;SLIM_BOOTLOADER"
-      c_user_include_directories="../..;../../lib/drivers;../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../lib/STM32CubeWB/Drivers/CMSIS/Include;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../lib/u8g2;../../bootloader/targets/$(FlipperHwRev)/furi_hal;../../bootloader/targets/furi_hal_include;../../bootloader/targets/$(FlipperHwRev)/fatfs;../../lib;../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Inc;../../bootloader/targets/$(FlipperHwRev)/hw;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/shci;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN/interface/patterns/ble_thread/tl;../../lib/STM32CubeWB/Middlewares/ST/STM32_WPAN"
-      debug_threads_script=""
-      external_assemble_command1="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; -x assembler-with-cpp  -c $(AsmOptions) $(Defines) $(Includes) &quot;$(RelInputPath)&quot; -MD -MF &quot;$(RelDependencyPath)&quot; -fno-diagnostics-show-caret -o &quot;$(RelTargetPath)&quot;"
-      external_link_command1="&quot;$(ToolChainDir)/arm-none-eabi-gcc&quot; $(LinkOptions) $(Objects) -o &quot;$(RelTargetPath)&quot; -Xlinker -Map=&quot;$(RelMapPath)&quot;"
-      link_linker_script_file="../../bootloader/targets/$(FlipperHwRev)/stm32wb55xx_flash_cm4.ld"
-      link_use_linker_script_file="Yes"
-      linker_additional_options="-mcpu=cortex-m4;-mthumb;-mfpu=fpv4-sp-d16;-mfloat-abi=hard;-specs=nosys.specs;-specs=nano.specs;-Wl,--gc-sections;-Wl,--undefined=uxTopUsedPriority"
-      linker_output_format="hex"
-      linker_section_placements_segments="FLASH1 RX 0x08000000 0x00100000;RAM1 RWX 0x20000000 0x00030000"
-      project_can_build_in_parallel="Yes"
-      project_directory="bootloader"
-      project_type="Executable" />
-    <folder Name="f6" path="../../bootloader/targets/f6" recurse="Yes">
-      <configuration Name="FlipperF7" build_exclude_from_build="Yes" />
-    </folder>
-    <folder Name="f7" path="../../bootloader/targets/f7" recurse="Yes">
-      <configuration Name="FlipperF6" build_exclude_from_build="Yes" />
-    </folder>
-    <folder Name="u8g2" path="../../lib/u8g2" recurse="Yes" />
-    <folder Name="Drivers">
-      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_gpio.c" />
-      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_i2c.c" />
-      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_spi.c" />
-      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_utils.c" />
-      <file file_name="../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Source/Templates/system_stm32wbxx.c" />
-      <file file_name="../../lib/drivers/lp5562.c" />
-      <file file_name="../../lib/STM32CubeWB/Drivers/CMSIS/Device/ST/STM32WBxx/Source/Templates/gcc/startup_stm32wb55xx_cm4.s" />
-      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_crc.c" />
-      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_crc.c" />
-      <file file_name="../../lib/STM32CubeWB/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_crc_ex.c" />
-    </folder>
-    <folder Name="lib">
       <folder
-        Name="fatfs"
-        exclude="cc*"
-        path="../../lib/fatfs"
-        recurse="Yes" />
+        Name="FreeRTOS-glue"
+        exclude=""
+        filter=""
+        path="../../lib/FreeRTOS-glue"
+        recurse="Yes">
+        <configuration Name="Common" build_exclude_from_build="Yes" />
+      </folder>
     </folder>
-    <file file_name="../../lib/toolbox/version.c" />
-    <configuration Name="Release" gcc_optimization_level="Level 2 for size" />
-    <folder
-      Name="src"
-      exclude=""
-      filter=""
-      path="../../bootloader/src/"
-      recurse="Yes" />
   </project>
-  <configuration
-    Name="MinRelease"
-    inherited_configurations="FlipperF7;Debugger: JLINK;Flags: Compact" />
-  <configuration Name="RAM Exec" hidden="Yes" />
 </solution>
