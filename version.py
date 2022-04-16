@@ -44,7 +44,7 @@ current_defines = None
 try:
   with open('version.inc', 'r') as file:
     current_defines = file.read()
-except FileNotFoundError:
+except EnvironmentError:
   pass
 
 if current_defines != new_defines:

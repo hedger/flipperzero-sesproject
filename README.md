@@ -17,7 +17,7 @@ git submodule update --init --recursive
 
 ### Начальная конфигурация SES
 5. Tools > Options > Building: 
-	1. В _Global Macros_ добавить `GCCRoot` со значением пути распакованного тулчейна + `/bin` (например, *`GCCRoot=D:/Tools/GNU Arm Embedded Toolchain/11.2-2022.02/bin`*)
+	1. В _Global Macros_ добавить `GCCRoot` со значением пути распакованного тулчейна + `/bin` (например, *`GCCRoot=D:/Tools/GNU Arm Embedded Toolchain/10 2021.10/bin`*)
 	2. _Parallel Building Threads_ = число ядер процессора
 
 6. Tools > Options > Environment > User Interface:
