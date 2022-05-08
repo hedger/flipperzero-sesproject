@@ -10,4 +10,4 @@ rem if /i "%3" neq "" set TARGET=%3
 echo Writing %FLASH_BIN% @ %FLASH_ADDR%
 
 REM optionally add 'verify' to program args
-openocd %OPENOCD_BASE_ARGS% -c "program %FLASH_BIN% reset exit %FLASH_ADDR%"
+openocd %OPENOCD_BASE_ARGS% -c "program %FLASH_BIN% verify reset exit %FLASH_ADDR%"
