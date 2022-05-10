@@ -1,1 +1,1 @@
-_update.cmd "../firmware/Debug/flipper-z-f7-firmware-local.bin" 0x8008000
+_update.cmd "../firmware/Debug/flipper-z-f7-firmware-local.bin" 0x8000000

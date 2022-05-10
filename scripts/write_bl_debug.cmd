@@ -1,1 +1,0 @@
-_update.cmd "../bootloader/Debug/flipper-z-f7-bootloader-local.bin" 0x8000000
